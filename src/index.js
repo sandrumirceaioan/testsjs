@@ -34,7 +34,7 @@ let users = [
 	},
 		{
 		username: 'sase',
-		company: 'Company2',
+		company: 'Company1',
 		history: [{company:'Company1',startDate:'2017-10-05'}]
 	},
 		{
@@ -61,16 +61,37 @@ let companies = [
 	{
 		name: 'Company1',
 		address: 'Address1'
-	},
-	{
-		name: 'Company2',
-		address: 'Address2'
-	},
-	{
-		name: 'Company3',
-		address: 'Address3'
 	}
+	// {
+	// 	name: 'Company2',
+	// 	address: 'Address2'
+	// },
+	// {
+	// 	name: 'Company3',
+	// 	address: 'Address3'
+	// }
 ];
+
+let firstDay = moment().startOf('month').format('YYYY-MM-DD');
+let firstDayLastMonth = moment().subtract(1, 'month').startOf('month').format('YYYY-MM-DD');
+
+console.log(firstDayLastMonth)
+
+for (let c=0; c<companies.length; c++) {
+	for (let i=0; i<users.length; i++) {
+		if (users[i].history.length > 0) {
+			// has company history
+			for (let j=0; j<users[i].history.length; j++) {
+				if (companies[c].name === users[i].history[j].company && users[i].history[j].startDate < firstDay && (!users[i].history[j].endDate || users[i].history[j].endDate >= firstDayLastMonth)) {
+					console.log(users[i].username);
+				}
+			}
+		} else {
+			// has no company history
+
+		}
+	}
+}
 
 
 });
